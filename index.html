@@ -48,37 +48,56 @@
         let beginPaint = false;
         let mousePosition = [];
 
-        canvas.onmousedown = (e) => {
-            beginPaint = true;
-            //鼠标点下时鼠标的位置
-            mousePosition = [e.clientX, e.clientY];
-        };
+        //判断是否手机
+        let isPhone = "ontouchstart" in document.documentElement;
 
-        canvas.onmousemove = (e) => {
-            if (beginPaint) {
-                //在鼠标的位置绘制图形
-                // 获取鼠标位置
-                // console.log(e)
-                let x = e.clientX;
-                let y = e.clientY;
+        if (!isPhone) {
+            canvas.onmousedown = (e) => {
+                beginPaint = true;
+                //鼠标点下时鼠标的位置
+                mousePosition = [e.clientX, e.clientY];
+            };
+            canvas.onmousemove = (e) => {
+                if (beginPaint) {
+                    //在鼠标的位置绘制图形
+                    // 获取鼠标位置
+                    // console.log(e)
+                    let x = e.clientX;
+                    let y = e.clientY;
 
-                //绘制路径
+                    //绘制路径
+                    ctx.beginPath();
+                    //让开始绘制的点为鼠标点下的位置
+                    ctx.moveTo(mousePosition[0], mousePosition[1]);
+                    //从鼠标开始绘制的点到 => 鼠标移动的位置 绘制直线
+                    ctx.lineTo(x, y);
+                    ctx.stroke();
+                    //将鼠标下次绘制的起始点作为上次绘制的终点
+                    mousePosition = [x, y];
+                } else {}
+            };
+
+            canvas.onmouseup = (e) => {
+                beginPaint = false;
+            };
+        } else {
+            canvas.ontouchstart = (e) => {
+                mousePosition = [
+                    //获取触摸开始的位置；[0]是因为不止一个手指
+                    e.targetTouches[0].clientX,
+                    e.targetTouches[0].clientY,
+                ];
+            };
+            canvas.ontouchmove = (e) => {
+                let x = e.targetTouches[0].clientX;
+                let y = e.targetTouches[0].clientY;
                 ctx.beginPath();
-                //让开始绘制的点为鼠标点下的位置
                 ctx.moveTo(mousePosition[0], mousePosition[1]);
-                //从鼠标开始绘制的点到 => 鼠标移动的位置 绘制直线
-                ctx.lineTo(x, y);
+                ctx.lineTo(e.targetTouches[0].clientX, e.targetTouches[0].clientY);
                 ctx.stroke();
-                //将鼠标下次绘制的起始点作为上次绘制的终点
                 mousePosition = [x, y];
-            } else {}
-        };
-
-        canvas.onmouseup = (e) => {
-            beginPaint = false;
-        };
-
-        // canvas.fillStyle =
+            };
+        }
     </script>
 </body>
 
