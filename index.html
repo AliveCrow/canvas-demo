@@ -39,11 +39,11 @@
         //绘制一个填充矩形(起始坐标x，起始坐标y，矩形的宽，矩形的高)
         ctx.fillRect(100, 100, 100, 100);
 
-        let beginPaint = false
+        let beginPaint = false;
 
         canvas.onmousedown = (e) => {
-            beginPaint = true
-        }
+            beginPaint = true;
+        };
 
         canvas.onmousemove = (e) => {
             if (beginPaint) {
@@ -52,16 +52,23 @@
                 // console.log(e)
                 let x = e.clientX;
                 let y = e.clientY;
-                ctx.fillRect(x - 5, y - 5, 10, 10);
-            } else {
+                //绘制矩形
+                // ctx.fillRect(x - 5, y - 5, 10, 10);
 
-            }
-
+                //生成路劲
+                ctx.beginPath();
+                //绘制圆弧
+                ctx.arc(x, y, 5, 0, 2 * Math.PI);
+                // 描边
+                // ctx.stroke();
+                //将图形填充
+                ctx.fill();
+            } else {}
         };
 
         canvas.onmouseup = (e) => {
-            beginPaint = false
-        }
+            beginPaint = false;
+        };
 
         // canvas.fillStyle =
     </script>
