@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+
+    <script>
+        // canvas的
+        let canvas = document.getElementById("canvas");
+
+        // 获取当前文档宽度和高度
+        canvas.width = document.documentElement.clientWidth;
+        canvas.height = document.documentElement.clientHeight;
+        // console.log(canvas.width, canvas.height, document.body.clientWidth)
+
+        //获取上下文；canvas 对象的 getContext 方法返回一个具有很多绘图功能的对象，这是一个绘图环境，使用这个对象就可以操作 canvas 元素进行绘制
+        let ctx = canvas.getContext("2d");
+
+        //图形填充颜色
+        ctx.fillStyle = "rgb(30,144,255)";
+        //绘制一个填充矩形(起始坐标x，起始坐标y，矩形的宽，矩形的高)
+        ctx.fillRect(100, 100, 100, 100);
+
+        let beginPaint = false
+
+        canvas.onmousedown = (e) => {
+            beginPaint = true
+        }
+
+        canvas.onmousemove = (e) => {
+            if (beginPaint) {
+                //在鼠标的位置绘制图形
+                // 获取鼠标位置
+                // console.log(e)
+                let x = e.clientX;
+                let y = e.clientY;
+                ctx.fillRect(x - 5, y - 5, 10, 10);
+            } else {
+
+            }
+
+        };
+
+        canvas.onmouseup = (e) => {
+            beginPaint = false
+        }
+
+        // canvas.fillStyle =
+    </script>
+</body>
+
+</html>
