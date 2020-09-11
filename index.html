@@ -38,6 +38,10 @@
         ctx.fillStyle = "rgb(30,144,255)";
         //描边样式
         ctx.strokeStyle = "none";
+        //线条宽度
+        ctx.lineWidth = 20;
+        //绘制的线条的末端为round
+        ctx.lineCap = "round";
         //绘制一个填充矩形(起始坐标x，起始坐标y，矩形的宽，矩形的高)
         ctx.fillRect(100, 100, 100, 100);
 
@@ -46,7 +50,6 @@
 
         canvas.onmousedown = (e) => {
             beginPaint = true;
-
             //鼠标点下时鼠标的位置
             mousePosition = [e.clientX, e.clientY];
         };
