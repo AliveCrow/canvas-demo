@@ -36,13 +36,19 @@
 
         //图形填充颜色
         ctx.fillStyle = "rgb(30,144,255)";
+        //描边样式
+        ctx.strokeStyle = "none";
         //绘制一个填充矩形(起始坐标x，起始坐标y，矩形的宽，矩形的高)
         ctx.fillRect(100, 100, 100, 100);
 
         let beginPaint = false;
+        let mousePosition = [];
 
         canvas.onmousedown = (e) => {
             beginPaint = true;
+
+            //鼠标点下时鼠标的位置
+            mousePosition = [e.clientX, e.clientY];
         };
 
         canvas.onmousemove = (e) => {
@@ -52,17 +58,16 @@
                 // console.log(e)
                 let x = e.clientX;
                 let y = e.clientY;
-                //绘制矩形
-                // ctx.fillRect(x - 5, y - 5, 10, 10);
 
-                //生成路劲
+                //绘制路径
                 ctx.beginPath();
-                //绘制圆弧
-                ctx.arc(x, y, 5, 0, 2 * Math.PI);
-                // 描边
-                // ctx.stroke();
-                //将图形填充
-                ctx.fill();
+                //让开始绘制的点为鼠标点下的位置
+                ctx.moveTo(mousePosition[0], mousePosition[1]);
+                //从鼠标开始绘制的点到 => 鼠标移动的位置 绘制直线
+                ctx.lineTo(x, y);
+                ctx.stroke();
+                //将鼠标下次绘制的起始点作为上次绘制的终点
+                mousePosition = [x, y];
             } else {}
         };
 
