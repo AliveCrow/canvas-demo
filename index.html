@@ -23,7 +23,6 @@
     <canvas id="canvas"></canvas>
 
     <script>
-        // canvas的
         let canvas = document.getElementById("canvas");
 
         // 获取当前文档宽度和高度
@@ -48,7 +47,7 @@
         let beginPaint = false;
         let mousePosition = [];
 
-        //判断是否手机
+        //判断是否移动设备
         let isPhone = "ontouchstart" in document.documentElement;
 
         if (!isPhone) {
