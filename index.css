@@ -1,0 +1,150 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+li{
+  list-style: none;
+}
+.svg{
+  padding: 10px 0;
+  transition: all .15s;
+}
+.svg:hover,.open:hover{
+  background-color:rgba(0, 0, 0, .1)
+}
+.stroke-one{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.stroke-one:hover>.svg,.stroke-one:hover>.open,.eraser:hover>.eraser-svg{
+  border:1px solid  rgba(0, 0, 0, .24);
+}
+.stroke-one>ul{
+  width: 130px;
+  position: absolute;
+  bottom: -70px;
+  background-color: #fff;
+  box-shadow: 0 0 4px rgba(0, 0, 0, .21);
+  padding: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 3px;
+  align-items: center;
+}
+.stroke-one li{
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  margin: 5px;
+  transition: all .15s;
+  
+}
+.stroke-one li:hover{
+  transform: scale(1.1);
+}
+.color-1{
+  background-color: #ff5252;
+}
+.color-2{
+  background-color: #000;
+}
+.color-3{
+  background-color: #00c853;
+}
+.color-4{
+  background-color: #00b0ff;
+}
+.point{
+  background-color: #000;
+}
+.point-1{
+  height: 5px!important;
+  width: 5px!important;
+}
+.point-2{
+  height: 10px!important;
+  width: 10px!important;
+}
+.point-3{
+  height: 12px!important;
+  width: 12px!important;
+}
+.point-4{
+  height: 15px!important;
+  width: 15px!important;
+}
+.point-5{
+  height: 20px!important;
+  width: 20px!important;
+}
+nav{
+  height: 65px;
+  background-color: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, .24);
+  display:flex;
+  flex-direction:row;
+  align-items: center;
+  position: relative;
+  justify-content: space-between;
+  width: 100%;
+  z-index: 11;
+}
+.item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.name{
+  font-size: 1.2rem;
+  padding: 0 20px;
+}
+.set{
+  height: 55px;
+  width: 40px;
+  padding: 15px 0;
+  margin-right: 20px;
+  transition: all .15s;
+}
+.set:hover{
+  border:1px solid  rgba(0, 0, 0, .24);
+  background-color:  rgba(0, 0, 0, .21);
+}
+.options{
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0 0 4px rgba(0, 0, 0, .21);
+  padding: 5px 0;
+  border-radius: 3px;
+  margin-right: 10px;
+  right: 0;
+  bottom: -90px;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+.options>p{
+  cursor: pointer;
+  margin: 5px 0;
+  padding: 5px;
+}
+.options>p:hover{
+  background-color:  rgba(0, 0, 0, .1);
+}
+.item>div{
+  padding: 0 5px;
+  color: rgba(0,0,0,.6);
+  cursor: pointer;
+}
+.item>div:hover{
+  color: #202124;
+}
+canvas {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  z-index: 10;
+}

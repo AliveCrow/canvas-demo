@@ -1,103 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        canvas {
-            display: block;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./index.css">
+  <title>Document</title>
 </head>
-
 <body>
+  <nav>
+    <div class="item">
+    <span class="name">简易画板</span>
+      <div class="eraser">
+        <img src="./eraser.svg" alt="" class="eraser-svg"  height="45" width="35" style="padding: 12px 0 5px;">
+      </div>
+      <div class="stroke-one">
+        <img src="./paint.svg" alt="" class="svg" height="45" width="35">
+        <img src="./open.svg" alt="" height="45" width="15" class=" open">
+          <ul class="select" style="display: none;">
+            <li class="color-1" data-color='#ff5252'></li>
+            <li class="color-2" data-color='#000'></li>
+            <li class="color-3" data-color='#00c853'></li>
+            <li class="color-4" data-color='#00b0ff'></li>
+            <li class="point point-1" data-size='5'></li>
+            <li class="point point-2" data-size='10'></li>
+            <li class="point point-3" data-size='12'></li>
+            <li class="point point-4" data-size='15'></li>
+            <li class="point point-5" data-size='20'></li>
+          </ul>
+          
+      </div>
+    </div>
+    <div style="position: relative;">
+      <img src="./options-vertical.svg" alt="" class="set">  
+      <div class="options" style="display: none;">
+        <p class="exportCanvas">导出为图片</p>
+        <p class="clear">清空绘图</p>
+      </div>
+    </div>
+  </nav>
     <canvas id="canvas"></canvas>
-
-    <script>
-        let canvas = document.getElementById("canvas");
-
-        // 获取当前文档宽度和高度
-        canvas.width = document.documentElement.clientWidth;
-        canvas.height = document.documentElement.clientHeight;
-        // console.log(canvas.width, canvas.height, document.body.clientWidth)
-
-        //获取上下文；canvas 对象的 getContext 方法返回一个具有很多绘图功能的对象，这是一个绘图环境，使用这个对象就可以操作 canvas 元素进行绘制
-        let ctx = canvas.getContext("2d");
-
-        //图形填充颜色
-        ctx.fillStyle = "rgb(30,144,255)";
-        //描边样式
-        ctx.strokeStyle = "none";
-        //线条宽度
-        ctx.lineWidth = 20;
-        //绘制的线条的末端为round
-        ctx.lineCap = "round";
-        //绘制一个填充矩形(起始坐标x，起始坐标y，矩形的宽，矩形的高)
-        ctx.fillRect(100, 100, 100, 100);
-
-        let beginPaint = false;
-        let mousePosition = [];
-
-        //判断是否移动设备
-        let isPhone = "ontouchstart" in document.documentElement;
-
-        if (!isPhone) {
-            canvas.onmousedown = (e) => {
-                beginPaint = true;
-                //鼠标点下时鼠标的位置
-                mousePosition = [e.clientX, e.clientY];
-            };
-            canvas.onmousemove = (e) => {
-                if (beginPaint) {
-                    //在鼠标的位置绘制图形
-                    // 获取鼠标位置
-                    // console.log(e)
-                    let x = e.clientX;
-                    let y = e.clientY;
-
-                    //绘制路径
-                    ctx.beginPath();
-                    //让开始绘制的点为鼠标点下的位置
-                    ctx.moveTo(mousePosition[0], mousePosition[1]);
-                    //从鼠标开始绘制的点到 => 鼠标移动的位置 绘制直线
-                    ctx.lineTo(x, y);
-                    ctx.stroke();
-                    //将鼠标下次绘制的起始点作为上次绘制的终点
-                    mousePosition = [x, y];
-                } else {}
-            };
-
-            canvas.onmouseup = (e) => {
-                beginPaint = false;
-            };
-        } else {
-            canvas.ontouchstart = (e) => {
-                mousePosition = [
-                    //获取触摸开始的位置；[0]是因为不止一个手指
-                    e.targetTouches[0].clientX,
-                    e.targetTouches[0].clientY,
-                ];
-            };
-            canvas.ontouchmove = (e) => {
-                let x = e.targetTouches[0].clientX;
-                let y = e.targetTouches[0].clientY;
-                ctx.beginPath();
-                ctx.moveTo(mousePosition[0], mousePosition[1]);
-                ctx.lineTo(e.targetTouches[0].clientX, e.targetTouches[0].clientY);
-                ctx.stroke();
-                mousePosition = [x, y];
-            };
-        }
-    </script>
+  <script  src="./script.js"></script>
 </body>
-
 </html>
