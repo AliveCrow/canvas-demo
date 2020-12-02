@@ -130,7 +130,7 @@ if (!isPhone) {
       y: e.clientY
     }
   }
-  canvas.ontouchstart = (e) => {
+  canvas.ontouchmove = (e) => {
 
     if (!data.isPaint) return;
     pushPoint(e)
