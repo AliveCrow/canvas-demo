@@ -121,6 +121,42 @@ if (!isPhone) {
     }
 
   }
+} else {
+  canvas.ontouchstart = (e) => {
+    data.isPaint = true
+    pushPoint(e)
+    data.beginPoint = {
+      x: e.clientX,
+      y: e.clientY
+    }
+  }
+  canvas.ontouchstart = (e) => {
+
+    if (!data.isPaint) return;
+    pushPoint(e)
+    if (data.pointsArr.length >= 3) {
+      //得到控制点
+      getPoint('mousemove')
+      paint(data.beginPoint, data.controlPoint, data.endPoint).then(() => {
+        data.beginPoint = data.endPoint;
+      })
+    }
+  }
+  canvas.ontouchend = (e) => {
+    pushPoint(e)
+    if (data.pointsArr.length >= 3) {
+      getPoint('mouseup')
+      //绘制
+      paint(data.beginPoint, data.controlPoint, data.endPoint).then(() => {
+        arr.push(ctx)
+        data.isPaint = false
+        data.beginPath = null
+        data.pointsArr = []
+      })
+
+    }
+
+  }
 }
 
 
