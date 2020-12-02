@@ -117,23 +117,20 @@ if (!isPhone) {
         data.beginPath = null
         data.pointsArr = []
       })
-
     }
-
   }
 } else {
   canvas.ontouchstart = (e) => {
     data.isPaint = true
-    pushPoint(e)
+    pushPoint(e.changedTouches[0])
     data.beginPoint = {
       x: e.clientX,
       y: e.clientY
     }
   }
   canvas.ontouchmove = (e) => {
-
     if (!data.isPaint) return;
-    pushPoint(e)
+    pushPoint(e.changedTouches[0])
     if (data.pointsArr.length >= 3) {
       //得到控制点
       getPoint('mousemove')
@@ -143,7 +140,7 @@ if (!isPhone) {
     }
   }
   canvas.ontouchend = (e) => {
-    pushPoint(e)
+    pushPoint(e.changedTouches[0])
     if (data.pointsArr.length >= 3) {
       getPoint('mouseup')
       //绘制
@@ -153,9 +150,7 @@ if (!isPhone) {
         data.beginPath = null
         data.pointsArr = []
       })
-
     }
-
   }
 }
 
